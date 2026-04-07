@@ -1,0 +1,25 @@
+using backend.Features.Login.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace backend.Features.Login.Data;
+
+public class LoginDbContext : DbContext
+{
+    public LoginDbContext(DbContextOptions<LoginDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Username).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.PasswordHash).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+        });
+    }
+}
