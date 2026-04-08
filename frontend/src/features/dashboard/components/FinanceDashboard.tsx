@@ -1,133 +1,107 @@
 import React from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
-import { LogOut, DollarSign, TrendingUp, CreditCard, FileText } from 'lucide-react';
+import { DashboardLayout } from '../../../components/DashboardLayout';
 
 export const FinanceDashboard: React.FC = () => {
-  const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    window.location.href = '/login';
-  };
+  const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <DollarSign className="h-8 w-8 text-green-600 mr-3" />
-              <h1 className="text-xl font-semibold text-gray-900">Carlton Airport Finance</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-              >
-                <LogOut className="h-4 w-4 mr-1" />
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Finance Dashboard</h2>
-          <p className="text-gray-600 mt-1">Monitor revenue, expenses, and financial operations</p>
+    <DashboardLayout>
+      <div className="space-y-6">
+        {/* Welcome Section */}
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Finance Dashboard
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Welcome back, {user?.name || 'Finance Officer'}! Monitor your financial operations.
+          </p>
         </div>
 
-        {/* Revenue Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <DollarSign className="h-6 w-6 text-green-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Today's Revenue</h3>
-            </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">$24,580</p>
-            <p className="text-sm text-green-600">+12% from yesterday</p>
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+            <p className="text-sm font-medium text-gray-600">Today's Revenue</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">$24,580</p>
+            <p className="text-xs text-green-600 mt-1">↑ 12% from yesterday</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <TrendingUp className="h-6 w-6 text-blue-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Monthly Revenue</h3>
-            </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">$687,420</p>
-            <p className="text-sm text-blue-600">+8% from last month</p>
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+            <p className="text-sm font-medium text-gray-600">Monthly Revenue</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">$687,420</p>
+            <p className="text-xs text-blue-600 mt-1">↑ 8% from last month</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <CreditCard className="h-6 w-6 text-purple-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Pending Transactions</h3>
-            </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">$45,230</p>
-            <p className="text-sm text-purple-600">23 transactions</p>
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+            <p className="text-sm font-medium text-gray-600">Pending Transactions</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">$45,230</p>
+            <p className="text-xs text-purple-600 mt-1">23 transactions pending</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
+            <p className="text-sm font-medium text-gray-600">Total Expenses</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">$128,450</p>
+            <p className="text-xs text-red-600 mt-1">↓ 5% from last month</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
+            <p className="text-sm font-medium text-gray-600">Net Profit</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">$558,970</p>
+            <p className="text-xs text-green-600 mt-1">↑ 15% from last month</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+            <p className="text-sm font-medium text-gray-600">Pending Invoices</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">$18,750</p>
+            <p className="text-xs text-indigo-600 mt-1">⚠️ 12 invoices overdue</p>
           </div>
         </div>
 
-        {/* Financial Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-            <div className="space-y-3">
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors flex items-center">
-                <FileText className="h-5 w-5 mr-3 text-gray-600" />
-                Generate Financial Report
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors flex items-center">
-                <CreditCard className="h-5 w-5 mr-3 text-gray-600" />
-                Process Refunds
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors flex items-center">
-                <DollarSign className="h-5 w-5 mr-3 text-gray-600" />
-                Revenue Analysis
-              </button>
+        {/* Revenue Breakdown */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue Breakdown</h2>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between text-sm mb-1">
+                <span className="text-gray-600">Flight Bookings</span>
+                <span className="font-medium">$18,420 (75%)</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="bg-blue-600 h-3 rounded-full" style={{ width: '75%' }}></div>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between text-sm mb-1">
+                <span className="text-gray-600">Cargo Services</span>
+                <span className="font-medium">$4,890 (20%)</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="bg-green-600 h-3 rounded-full" style={{ width: '20%' }}></div>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between text-sm mb-1">
+                <span className="text-gray-600">Airport Fees</span>
+                <span className="font-medium">$1,270 (5%)</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="bg-purple-600 h-3 rounded-full" style={{ width: '5%' }}></div>
+              </div>
             </div>
           </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Revenue Breakdown</h3>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Flight Bookings</span>
-                  <span className="font-medium">$18,420</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: '75%' }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Cargo Services</span>
-                  <span className="font-medium">$4,890</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-green-600 h-2 rounded-full" style={{ width: '20%' }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Airport Fees</span>
-                  <span className="font-medium">$1,270</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-purple-600 h-2 rounded-full" style={{ width: '5%' }}></div>
-                </div>
-              </div>
-            </div>
+        </div>
+
+        {/* Revenue Trend */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue Trend (This Month)</h2>
+          <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+            <p className="text-gray-500">Chart placeholder - Revenue over time</p>
           </div>
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Transactions</h3>
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Transactions</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -177,7 +151,7 @@ export const FinanceDashboard: React.FC = () => {
             </table>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 };
