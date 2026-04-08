@@ -52,28 +52,20 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-blue-100">
-            <svg className="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-          </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Carlton Airport Management System
-          </p>
-        </div>
+    <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-xl p-8 w-full max-w-md">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-bold text-blue-900 mb-2">
+          Welcome Back !
+        </h2>
+        <p className="text-xs text-gray-500">
+          Log in to access your personalized travel itinerary.
+        </p>
+      </div>
         
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4">
+      <form className="space-y-5" onSubmit={handleSubmit}>
+        <div className="space-y-4">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                Username
-              </label>
               <input
                 id="username"
                 name="username"
@@ -81,15 +73,12 @@ export const LoginForm: React.FC = () => {
                 required
                 value={credentials.username}
                 onChange={(e) => handleInputChange('username', e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Enter your username"
+                className="appearance-none relative block w-full px-4 py-3 border border-blue-200 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-white/80"
+                placeholder="username"
               />
             </div>
           
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
               <input
                 id="password"
                 name="password"
@@ -97,24 +86,22 @@ export const LoginForm: React.FC = () => {
                 required
                 value={credentials.password}
                 onChange={(e) => handleInputChange('password', e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Enter your password"
+                className="appearance-none relative block w-full px-4 py-3 border border-blue-200 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-white/80"
+                placeholder="Password"
               />
             </div>
           </div>
+
+          {/* Forgot Password */}
+          <div className="flex justify-end">
+            <a href="#" className="text-xs text-blue-600 hover:text-blue-800">
+              Forgot Password ?
+            </a>
+          </div>
           
           {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="flex">
-                <div className="flex-shrink-0">
-                  <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm text-red-800">{error}</p>
-                </div>
-              </div>
+            <div className="rounded-md bg-red-50 p-3">
+              <p className="text-xs text-red-800 text-center">{error}</p>
             </div>
           )}
           
@@ -122,7 +109,7 @@ export const LoginForm: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -133,18 +120,21 @@ export const LoginForm: React.FC = () => {
                   Signing in...
                 </>
               ) : (
-                'Sign in'
+                'LOGIN'
               )}
             </button>
           </div>
           
-          <div className="mt-4 text-center">
-            <p className="text-xs text-gray-500">
-              Demo credentials: ticket/ticket123, finance/finance123, operations/ops123, admin/admin123
+          {/* Sign up link */}
+          <div className="text-center">
+            <p className="text-xs text-gray-600">
+              Don't have an account ?{' '}
+              <a href="#" className="text-blue-600 hover:text-blue-800">
+                Sign up
+              </a>
             </p>
           </div>
         </form>
       </div>
-    </div>
-  );
-};
+    );
+  };

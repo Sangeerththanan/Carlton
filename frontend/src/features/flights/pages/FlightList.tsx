@@ -3,7 +3,7 @@ import { useFlights } from '../hooks/useFlights';
 import { FlightCard, FlightForm } from '../components';
 import Modal from '@/components/Modal';
 import Toast from '@/components/Toast';
-import { useToast } from '@/hooks/useToast';
+import { useToast } from '../../../contexts/ToastContext';
 import type { Flight } from '../types/flightTypes';
 
 const FlightList = () => {
