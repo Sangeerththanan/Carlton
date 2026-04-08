@@ -15,12 +15,12 @@ export const navigationConfig: Record<string, NavItem[]> = {
     { icon: 'Settings', label: 'Settings', path: '/dashboard/settings' }
   ],
   customer: [
-    { icon: 'Dashboard', label: 'Dashboard', path: '/dashboard/customer' },
-    { icon: 'Book', label: 'Book Flight', path: '/customer/book' },
-    { icon: 'Tickets', label: 'My Bookings', path: '/customer/bookings' },
-    { icon: 'User', label: 'Profile', path: '/customer/profile' },
-    { icon: 'CreditCard', label: 'Payment', path: '/customer/payment' }
-  ],
+  { icon: '🏠', label: 'Dashboard', path: '/dashboard/customer' },
+  { icon: '✈️', label: 'Book Flight', path: '/customer/book' },
+  { icon: '🎫', label: 'My Bookings', path: '/customer/bookings' },
+  { icon: '👤', label: 'Profile', path: '/customer/profile' },
+  { icon: '💳', label: 'Payment', path: '/customer/payment' }
+],
   ticket: [
     { icon: '📊', label: 'Dashboard', path: '/dashboard/ticket' },
     { icon: '🎫', label: 'New Booking', path: '/dashboard/ticket/new-booking' },
