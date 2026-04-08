@@ -7,6 +7,7 @@ export interface NavItem {
 export const navigationConfig: Record<string, NavItem[]> = {
   admin: [
     { icon: '📊', label: 'Dashboard', path: '/dashboard/admin' },
+    { icon: '👥', label: 'Providers', path: '/providers' },
     { icon: '✈️', label: 'Flights', path: '/flights' },
     { icon: '👥', label: 'Users', path: '/dashboard/users' },
     { icon: '🎫', label: 'Bookings', path: '/dashboard/bookings' },

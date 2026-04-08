@@ -4,6 +4,7 @@ import { LandingPage } from './features/landing';
 import { LoginPage, ProtectedRoute } from './features/login';
 import { DashboardRouter } from './features/dashboard/components/DashboardRouter';
 import FlightsFeature from './features/flights';
+import { ProvidersFeature } from './features/providers';
 import { ToastProvider } from './contexts/ToastContext';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
@@ -29,6 +30,12 @@ function AppContent() {
         <Route path="/flights" element={
           <ProtectedRoute>
             <FlightsFeature />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/providers" element={
+          <ProtectedRoute>
+            <ProvidersFeature />
           </ProtectedRoute>
         } />
         
