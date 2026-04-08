@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
 import Toast from '../components/Toast';
 
 interface ToastMessage {
@@ -9,6 +9,10 @@ interface ToastMessage {
 
 interface ToastContextType {
   showToast: (message: string, type: 'success' | 'error' | 'info') => void;
+  showSuccess: (message: string) => void;
+  showError: (message: string) => void;
+  toasts: ToastMessage[];
+  removeToast: (id: string) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -37,8 +41,16 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   };
 
+  const showSuccess = (message: string) => {
+    showToast(message, 'success');
+  };
+
+  const showError = (message: string) => {
+    showToast(message, 'error');
+  };
+
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={{ showToast, showSuccess, showError, toasts, removeToast }}>
       {children}
       {toasts.map(toast => (
         <Toast

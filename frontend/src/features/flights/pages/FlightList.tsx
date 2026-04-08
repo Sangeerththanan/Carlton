@@ -4,6 +4,7 @@ import { FlightCard, FlightForm } from '../components';
 import Modal from '@/components/Modal';
 import Toast from '@/components/Toast';
 import { useToast } from '../../../contexts/ToastContext';
+import { DashboardLayout } from '../../../components/DashboardLayout';
 import type { Flight } from '../types/flightTypes';
 
 const FlightList = () => {
@@ -114,45 +115,30 @@ const FlightList = () => {
   }
 
   return (
-    <>
+    <DashboardLayout>
       <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Flight Management</h1>
-        <button
-          onClick={handleAddNew}
-          className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-        >
-          Add New Flight
-        </button>
-      </div>
-
-      <Modal
-        isOpen={showForm}
-        onClose={handleCancel}
-        title={editingFlight ? 'Edit Flight' : 'Create New Flight'}
-      >
-        <FlightForm
-          flight={editingFlight}
-          onSubmit={editingFlight ? (data) => handleUpdate(editingFlight.id, data) : handleCreate}
-          onCancel={handleCancel}
-        />
-      </Modal>
-
-      {flights.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="text-gray-500 text-lg">No flights found</div>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">Flight Management</h1>
           <button
             onClick={handleAddNew}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
           >
-            Create Your First Flight
+            Add New Flight
           </button>
         </div>
-      ) : (
-        <div>
-          <div className="mb-4 text-gray-600">
-            Showing {flights.length} flight{flights.length !== 1 ? 's' : ''}
-          </div>
+        <Modal
+          isOpen={showForm}
+          onClose={handleCancel}
+          title={editingFlight ? 'Edit Flight' : 'Create New Flight'}
+        >
+          <FlightForm
+            flight={editingFlight}
+            onSubmit={editingFlight ? (data) => handleUpdate(editingFlight.id, data) : handleCreate}
+            onCancel={handleCancel}
+          />
+        </Modal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {flights.map((flight) => (
             <FlightCard
               key={flight.id}
@@ -162,19 +148,18 @@ const FlightList = () => {
             />
           ))}
         </div>
-      )}
-    </div>
 
-      {/* Toast Container */}
-      {toasts.map((toast) => (
-        <Toast
-          key={toast.id}
-          message={toast.message}
-          type={toast.type}
-          onClose={() => removeToast(toast.id)}
-        />
-      ))}
-    </>
+        {/* Toast Container */}
+        {toasts.map((toast) => (
+          <Toast
+            key={toast.id}
+            message={toast.message}
+            type={toast.type}
+            onClose={() => removeToast(toast.id)}
+          />
+        ))}
+      </div>
+    </DashboardLayout>
   );
 };
 

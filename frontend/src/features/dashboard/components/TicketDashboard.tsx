@@ -1,167 +1,136 @@
 import React from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
-import { LogOut, Search, Plus, Calendar, Users } from 'lucide-react';
+import { DashboardLayout } from '../../../components/DashboardLayout';
 
 export const TicketDashboard: React.FC = () => {
-  const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    window.location.href = '/login';
-  };
+  const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Search className="h-8 w-8 text-blue-600 mr-3" />
-              <h1 className="text-xl font-semibold text-gray-900">Carlton Airport Ticketing</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-              >
-                <LogOut className="h-4 w-4 mr-1" />
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Ticketing Dashboard</h2>
-          <p className="text-gray-600 mt-1">Manage flight bookings and passenger services</p>
+    <DashboardLayout>
+      <div className="space-y-6">
+        {/* Welcome Section */}
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Ticketing Dashboard
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Welcome back, {user?.name || 'Ticket Officer'}! Here's your daily overview.
+          </p>
         </div>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <Plus className="h-6 w-6 text-green-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">New Booking</h3>
-            </div>
-            <p className="text-gray-600 mb-4">Create a new flight booking for passengers</p>
-            <button className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">
-              Create Booking
-            </button>
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+            <p className="text-sm font-medium text-gray-600">Tickets Issued Today</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">427</p>
+            <p className="text-xs text-green-600 mt-1">↑ 12% from yesterday</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <Search className="h-6 w-6 text-blue-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Search Booking</h3>
-            </div>
-            <p className="text-gray-600 mb-4">Find existing bookings by PNR or passenger name</p>
-            <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
-              Search Bookings
-            </button>
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
+            <p className="text-sm font-medium text-gray-600">Tickets Pending</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">187</p>
+            <p className="text-xs text-yellow-600 mt-1">⚠️ Requires attention</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <Calendar className="h-6 w-6 text-purple-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Today's Flights</h3>
-            </div>
-            <p className="text-gray-600 mb-4">View flight schedule and availability</p>
-            <button className="w-full bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors">
-              View Schedule
-            </button>
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+            <p className="text-sm font-medium text-gray-600">Avg Processing Time</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">3.2 <span className="text-lg">mins</span></p>
+            <p className="text-xs text-blue-600 mt-1">↓ 0.5 mins improvement</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+            <p className="text-sm font-medium text-gray-600">Success Rate</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">94%</p>
+            <p className="text-xs text-green-600 mt-1">↑ 2% from last week</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
+            <p className="text-sm font-medium text-gray-600">Issuance Failure</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">19</p>
+            <p className="text-xs text-red-600 mt-1">↓ 3 from yesterday</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-orange-500">
+            <p className="text-sm font-medium text-gray-600">Urgent PNR's</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">13</p>
+            <p className="text-xs text-orange-600 mt-1">🚨 High priority</p>
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <Users className="h-8 w-8 text-blue-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Bookings Today</p>
-                <p className="text-2xl font-semibold text-gray-900">87</p>
+        {/* PNR Management Status */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">PNR Management Status</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-red-50 rounded-lg p-4 border border-red-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-red-700">Failed</p>
+                  <p className="text-2xl font-bold text-red-900">8</p>
+                </div>
+                <span className="text-3xl">❌</span>
               </div>
             </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <Calendar className="h-8 w-8 text-green-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Available Seats</p>
-                <p className="text-2xl font-semibold text-gray-900">342</p>
+            
+            <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-yellow-700">Pending Creation</p>
+                  <p className="text-2xl font-bold text-yellow-900">23</p>
+                </div>
+                <span className="text-3xl">⏳</span>
               </div>
             </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <Plus className="h-8 w-8 text-yellow-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Pending Check-ins</p>
-                <p className="text-2xl font-semibold text-gray-900">23</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <Search className="h-8 w-8 text-purple-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Modified Today</p>
-                <p className="text-2xl font-semibold text-gray-900">12</p>
+            
+            <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-green-700">Created & Confirmed</p>
+                  <p className="text-2xl font-bold text-green-900">1,345</p>
+                </div>
+                <span className="text-3xl">✅</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Bookings</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PNR</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Passenger</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Flight</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Route</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ABC123</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">John Smith</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">CA234</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">LHR-JFK</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      Confirmed
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">DEF456</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sarah Johnson</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">CA567</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">JFK-LAX</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                      Pending
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        {/* Ticket Processing Trend */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Ticket Processing Trend (Today)</h2>
+          <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+            <p className="text-gray-500">Chart placeholder - Ticket processing over time</p>
           </div>
         </div>
-      </main>
-    </div>
+
+        {/* Notification Panel */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Notification Panel</h2>
+          <div className="space-y-3">
+            <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+              <span className="text-xl">ℹ️</span>
+              <div>
+                <p className="text-sm font-medium text-blue-900">System update scheduled</p>
+                <p className="text-xs text-blue-600 mt-1">Tonight at 11:00 PM</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+              <span className="text-xl">⚠️</span>
+              <div>
+                <p className="text-sm font-medium text-yellow-900">High volume warning</p>
+                <p className="text-xs text-yellow-600 mt-1">Ticket requests increased by 25%</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+              <span className="text-xl">✅</span>
+              <div>
+                <p className="text-sm font-medium text-green-900">Daily target achieved</p>
+                <p className="text-xs text-green-600 mt-1">500 tickets processed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
   );
 };
