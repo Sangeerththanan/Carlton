@@ -8,6 +8,7 @@ using backend.Features.Flights.Services;
 using backend.Features.Login.Repositories;
 using backend.Features.Login.Services;
 using backend.Features.Login.Data;
+using backend.Features.Bookings.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,9 @@ builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+
+// Register Booking services
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");

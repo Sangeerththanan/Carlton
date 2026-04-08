@@ -9,53 +9,73 @@ public static class DataSeeder
 {
     public static async Task SeedUsersAsync(FlightBookingDbContext context)
     {
-        // Check if users already exist
-        if (await context.Users.AnyAsync())
+        // Check if customer users already exist
+        var existingCustomers = await context.Users.AnyAsync(u => u.Role == UserRole.Customer);
+        if (existingCustomers)
         {
-            return; // Database has been seeded
+            return; // Customer users have been seeded
         }
 
-        var users = new List<User>
+        var customerUsers = new List<User>
         {
+            // Demo Customer Users
             new User
             {
-                Username = "ticket",
-                PasswordHash = "ticket123", // In production, use hashed passwords
-                Name = "John Ticket",
-                Role = UserRole.TicketOfficer,
+                Username = "customer1",
+                PasswordHash = "customer123",
+                Name = "Alice Johnson",
+                Role = UserRole.Customer,
+                Email = "alice.johnson@email.com",
+                Phone = "+1234567890",
+                Address = "123 Main Street, Apt 4B",
+                City = "New York",
+                Country = "USA",
+                LoyaltyPoints = 150,
+                DateOfBirth = new DateTime(1985, 5, 15),
+                PreferredClass = "Economy",
+                SpecialRequests = "Window seat preferred",
                 CreatedAt = DateTime.UtcNow,
                 IsActive = true
             },
             new User
             {
-                Username = "finance",
-                PasswordHash = "finance123", // In production, use hashed passwords
-                Name = "Sarah Finance",
-                Role = UserRole.FinanceOfficer,
+                Username = "customer2",
+                PasswordHash = "customer123",
+                Name = "Bob Smith",
+                Role = UserRole.Customer,
+                Email = "bob.smith@email.com",
+                Phone = "+1987654321",
+                Address = "456 Oak Avenue",
+                City = "Los Angeles",
+                Country = "USA",
+                LoyaltyPoints = 75,
+                DateOfBirth = new DateTime(1990, 8, 22),
+                PreferredClass = "Business",
+                SpecialRequests = "Vegetarian meal",
                 CreatedAt = DateTime.UtcNow,
                 IsActive = true
             },
             new User
             {
-                Username = "operations",
-                PasswordHash = "ops123", // In production, use hashed passwords
-                Name = "Mike Operations",
-                Role = UserRole.OperationsManager,
-                CreatedAt = DateTime.UtcNow,
-                IsActive = true
-            },
-            new User
-            {
-                Username = "admin",
-                PasswordHash = "admin123", // In production, use hashed passwords
-                Name = "Admin User",
-                Role = UserRole.Admin,
+                Username = "customer3",
+                PasswordHash = "customer123",
+                Name = "Carol Williams",
+                Role = UserRole.Customer,
+                Email = "carol.williams@email.com",
+                Phone = "+1122334455",
+                Address = "789 Pine Road",
+                City = "Chicago",
+                Country = "USA",
+                LoyaltyPoints = 300,
+                DateOfBirth = new DateTime(1978, 12, 3),
+                PreferredClass = "First",
+                SpecialRequests = "Extra legroom, aisle seat",
                 CreatedAt = DateTime.UtcNow,
                 IsActive = true
             }
         };
 
-        await context.Users.AddRangeAsync(users);
+        await context.Users.AddRangeAsync(customerUsers);
         await context.SaveChangesAsync();
     }
 }

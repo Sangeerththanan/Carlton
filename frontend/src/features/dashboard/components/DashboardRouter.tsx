@@ -4,6 +4,7 @@ import { AdminDashboard } from './AdminDashboard';
 import { TicketDashboard } from './TicketDashboard';
 import { FinanceDashboard } from './FinanceDashboard';
 import { OperationsDashboard } from './OperationsDashboard';
+import { CustomerDashboard } from './CustomerDashboard';
 
 export const DashboardRouter: React.FC = () => {
   const { role } = useParams<{ role: string }>();
@@ -17,6 +18,8 @@ export const DashboardRouter: React.FC = () => {
       return <FinanceDashboard />;
     case 'operationsmanager':
       return <OperationsDashboard />;
+    case 'customer':
+      return <CustomerDashboard />;
     default:
       return <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">

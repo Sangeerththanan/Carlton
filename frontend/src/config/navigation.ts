@@ -6,13 +6,20 @@ export interface NavItem {
 
 export const navigationConfig: Record<string, NavItem[]> = {
   admin: [
-    { icon: '📊', label: 'Dashboard', path: '/dashboard/admin' },
-    { icon: '👥', label: 'Providers', path: '/providers' },
-    { icon: '✈️', label: 'Flights', path: '/flights' },
-    { icon: '👥', label: 'Users', path: '/dashboard/users' },
-    { icon: '🎫', label: 'Bookings', path: '/dashboard/bookings' },
-    { icon: '📈', label: 'Reports', path: '/dashboard/reports' },
-    { icon: '⚙️', label: 'Settings', path: '/dashboard/settings' }
+    { icon: 'Dashboard', label: 'Dashboard', path: '/dashboard/admin' },
+    { icon: 'Providers', label: 'Providers', path: '/providers' },
+    { icon: 'Flights', label: 'Flights', path: '/flights' },
+    { icon: 'Users', label: 'Users', path: '/dashboard/users' },
+    { icon: 'Bookings', label: 'Bookings', path: '/dashboard/bookings' },
+    { icon: 'Reports', label: 'Reports', path: '/dashboard/reports' },
+    { icon: 'Settings', label: 'Settings', path: '/dashboard/settings' }
+  ],
+  customer: [
+    { icon: 'Dashboard', label: 'Dashboard', path: '/dashboard/customer' },
+    { icon: 'Book', label: 'Book Flight', path: '/customer/book' },
+    { icon: 'Tickets', label: 'My Bookings', path: '/customer/bookings' },
+    { icon: 'User', label: 'Profile', path: '/customer/profile' },
+    { icon: 'CreditCard', label: 'Payment', path: '/customer/payment' }
   ],
   ticket: [
     { icon: '📊', label: 'Dashboard', path: '/dashboard/ticket' },
