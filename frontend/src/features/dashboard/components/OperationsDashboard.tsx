@@ -1,136 +1,103 @@
 import React from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
-import { LogOut, Plane, Clock, AlertTriangle, CheckCircle } from 'lucide-react';
+import { DashboardLayout } from '../../../components/DashboardLayout';
 
 export const OperationsDashboard: React.FC = () => {
-  const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    window.location.href = '/login';
-  };
+  const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Plane className="h-8 w-8 text-orange-600 mr-3" />
-              <h1 className="text-xl font-semibold text-gray-900">Carlton Airport Operations</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-              >
-                <LogOut className="h-4 w-4 mr-1" />
-                Logout
-              </button>
-            </div>
-          </div>
+    <DashboardLayout>
+      <div className="space-y-6">
+        {/* Welcome Section */}
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Operations Dashboard
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Welcome back, {user?.name || 'Operations Manager'}! Monitor airport operations.
+          </p>
         </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Operations Dashboard</h2>
-          <p className="text-gray-600 mt-1">Monitor flight operations, gate management, and airport status</p>
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+            <p className="text-sm font-medium text-gray-600">On Time</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">28</p>
+            <p className="text-xs text-green-600 mt-1">Flights on schedule</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
+            <p className="text-sm font-medium text-gray-600">Delayed</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">8</p>
+            <p className="text-xs text-yellow-600 mt-1">Flights delayed</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+            <p className="text-sm font-medium text-gray-600">Departed</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">42</p>
+            <p className="text-xs text-blue-600 mt-1">Flights departed today</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
+            <p className="text-sm font-medium text-gray-600">Alerts</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">3</p>
+            <p className="text-xs text-red-600 mt-1">Active alerts</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+            <p className="text-sm font-medium text-gray-600">Gate Occupancy</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">78%</p>
+            <p className="text-xs text-purple-600 mt-1">18/23 gates occupied</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-orange-500">
+            <p className="text-sm font-medium text-gray-600">Weather Status</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">Clear</p>
+            <p className="text-xs text-green-600 mt-1">No weather delays</p>
+          </div>
         </div>
 
         {/* Flight Status Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <Plane className="h-6 w-6 text-green-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">On Time</h3>
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Flight Status Overview</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-3">
+                <span className="text-2xl">On Time</span>
+              </div>
+              <p className="text-2xl font-bold text-gray-900">28</p>
+              <p className="text-sm text-gray-600">Flights</p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">28</p>
-            <p className="text-sm text-green-600">Flights on schedule</p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <Clock className="h-6 w-6 text-yellow-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Delayed</h3>
+            
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-3">
+                <span className="text-2xl">Delayed</span>
+              </div>
+              <p className="text-2xl font-bold text-gray-900">8</p>
+              <p className="text-sm text-gray-600">Flights</p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">8</p>
-            <p className="text-sm text-yellow-600">Flights delayed</p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <CheckCircle className="h-6 w-6 text-blue-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Departed</h3>
+            
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-3">
+                <span className="text-2xl">Departed</span>
+              </div>
+              <p className="text-2xl font-bold text-gray-900">42</p>
+              <p className="text-sm text-gray-600">Flights</p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">42</p>
-            <p className="text-sm text-blue-600">Flights departed today</p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center mb-4">
-              <AlertTriangle className="h-6 w-6 text-red-600" />
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Alerts</h3>
-            </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">3</p>
-            <p className="text-sm text-red-600">Active alerts</p>
-          </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Flight Management</h3>
-            <div className="space-y-3">
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors">
-                Update Flight Status
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors">
-                Gate Assignment
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors">
-                Schedule Changes
-              </button>
-            </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Airport Status</h3>
-            <div className="space-y-3">
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors">
-                Weather Conditions
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors">
-                Runway Status
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors">
-                Security Updates
-              </button>
-            </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Emergency</h3>
-            <div className="space-y-3">
-              <button className="w-full text-left px-4 py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-md transition-colors">
-                Emergency Protocol
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-md transition-colors">
-                Contact Tower
-              </button>
-              <button className="w-full text-left px-4 py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-md transition-colors">
-                Alert Broadcast
-              </button>
+            
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-3">
+                <span className="text-2xl">Alerts</span>
+              </div>
+              <p className="text-2xl font-bold text-gray-900">3</p>
+              <p className="text-sm text-gray-600">Active</p>
             </div>
           </div>
         </div>
 
-        {/* Flight Schedule */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Today's Flight Schedule</h3>
+        {/* Today's Flight Schedule */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Today's Flight Schedule</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -191,7 +158,43 @@ export const OperationsDashboard: React.FC = () => {
             </table>
           </div>
         </div>
-      </main>
-    </div>
+
+        {/* Airport Status */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Airport Status</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-blue-700">Weather Conditions</p>
+                  <p className="text-lg font-bold text-blue-900">Clear</p>
+                </div>
+                <span className="text-3xl">Sunny</span>
+              </div>
+            </div>
+            
+            <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-green-700">Runway Status</p>
+                  <p className="text-lg font-bold text-green-900">All Open</p>
+                </div>
+                <span className="text-3xl">Runway</span>
+              </div>
+            </div>
+            
+            <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-purple-700">Security Level</p>
+                  <p className="text-lg font-bold text-purple-900">Normal</p>
+                </div>
+                <span className="text-3xl">Shield</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
   );
 };
