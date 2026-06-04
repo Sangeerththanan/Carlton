@@ -1,0 +1,19 @@
+[
+  {
+    "id": "r1",
+    "from": "LHR",
+    "to": "DOH",
+    "fromCity": "London",
+    "toCity": "Doha",
+    "price": "£349",
+    "badge": "Best price this week"
+  },
+  {
+    "id": "r2",
+    "from": "LHR",
+    "to": "DXB",
+    "fromCity": "London",
+    "toCity": "Dubai",
+    "price": "£670"
+  }
+]

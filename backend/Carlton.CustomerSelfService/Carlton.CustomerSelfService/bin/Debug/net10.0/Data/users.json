@@ -1,0 +1,12 @@
+{
+  "id": "cust_001",
+  "name": "Alice Johnson",
+  "username": "customer1",
+  "avatar": "AJ",
+  "stats": {
+    "activeBookings": 3,
+    "completedTrips": 12,
+    "loyaltyPoints": 4350,
+    "pendingActions": 0
+  }
+}

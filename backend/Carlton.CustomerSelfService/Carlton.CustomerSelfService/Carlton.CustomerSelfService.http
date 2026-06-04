@@ -1,0 +1,6 @@
+@Carlton.CustomerSelfService_HostAddress = http://localhost:5193
+
+GET {{Carlton.CustomerSelfService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

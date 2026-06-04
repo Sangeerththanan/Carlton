@@ -1,0 +1,19 @@
+[
+  {
+    "id": "p1",
+    "badgeType": "tag",
+    "badge": "LIMITED TIME",
+    "highlight": "Summer Sale — Up to 40% Off!",
+    "description": "Book before June 30th and enjoy discounted fares on all international routes."
+  },
+  {
+    "id": "p2",
+    "badgeType": "globe",
+    "badge": "NEW ROUTE",
+    "highlight": "London ✈ Singapore",
+    "isFlightHighlight": true,
+    "from": "London",
+    "to": "Singapore",
+    "description": "Launching non-stop July 15th, 2026. Early bird fares available."
+  }
+]

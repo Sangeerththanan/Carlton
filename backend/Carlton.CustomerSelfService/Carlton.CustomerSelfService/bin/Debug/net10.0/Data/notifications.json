@@ -1,0 +1,16 @@
+[
+  {
+    "id": "n1",
+    "type": "booking_confirmed",
+    "title": "Booking Confirmed",
+    "subtitle": "PNR: ABC123 • London to Dubai",
+    "time": "2 days ago"
+  },
+  {
+    "id": "n2",
+    "type": "ticket_issued",
+    "title": "E-Ticket Issued",
+    "subtitle": "Ticket Number: 1234567890",
+    "time": "2 days ago"
+  }
+]
